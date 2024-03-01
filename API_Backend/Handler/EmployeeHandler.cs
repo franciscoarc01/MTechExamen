@@ -8,11 +8,12 @@ namespace API_Backend.Handler
     {
         private static List<Employee> employees;
         private static List<Employee> sortedEmployes;
+        private static string PATH = "";
 
         private static List<Employee> convertData()
         {
             List<Employee> employees = new List<Employee>();
-            string[] data = Lectura.Lista("");
+            string[] data = Lectura.Lista(PATH);
             foreach (string dataElement in data)
             {
                 string[] properties = dataElement.Split(',');
@@ -61,7 +62,7 @@ namespace API_Backend.Handler
                         employeeAux.Status
                     );
                 }
-                Escritura.EscrituraFuncion("", arrayRAWData);
+                Escritura.EscrituraFuncion(PATH, arrayRAWData);
                 return true;
             }
             catch
