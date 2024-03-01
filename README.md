@@ -27,6 +27,6 @@ En el mismo viene las pruebas unitarias de la solución.
 
 ## Authors
 
-* Francisco Árciga
+* **Francisco Árciga**
 
 ## License
