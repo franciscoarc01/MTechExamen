@@ -18,9 +18,16 @@ namespace API_Backend.Controllers
 
         // GET api/<EmployeeController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public Employee Get(int id)
         {
-            return "value";
+            return null;
+        }
+
+        // GET api/<EmployeeController>/name
+        [HttpGet("{name}")]
+        public IEnumerable<Employee> Get(string name)
+        {
+            return new List<Employee>();
         }
 
         // POST api/<EmployeeController>
