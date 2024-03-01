@@ -1,4 +1,5 @@
-﻿using API_Backend.Models;
+﻿using API_Backend.Handler;
+using API_Backend.Models;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -13,41 +14,57 @@ namespace API_Backend.Controllers
         [HttpGet]
         public IEnumerable<Employee> Get()
         {
-            return new List<Employee>();
+            return EmployeeHandler.Employees();
         }
 
         // GET api/<EmployeeController>/5
         [HttpGet("{id}")]
-        public Employee Get(int id)
+        public ActionResult<Employee> Get(string id)
         {
-            return null;
+            Employee employee = EmployeeHandler.FindEmployee(id);
+            if(employee == null)
+            {
+                return NotFound();
+            }
+            return Ok(employee);
         }
 
         // GET api/<EmployeeController>/name
         [HttpGet("{name}")]
-        public IEnumerable<Employee> Get(string name)
+        public IEnumerable<Employee> GetByName(string name)
         {
-            return new List<Employee>();
+            return EmployeeHandler.FindEmployeeByNames(name);
         }
 
         // POST api/<EmployeeController>
         [HttpPost]
-        public bool Post([FromBody] Employee employee)
+        public ActionResult<bool> Post([FromBody] Employee employee)
         {
-            return true;
+            bool result = EmployeeHandler.InsertEmployee(employee);
+            return result ? Ok(result) : BadRequest();
         }
 
         // PUT api/<EmployeeController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Employee employee)
+        public ActionResult<Employee> Put(string id, [FromBody] Employee employee)
         {
+            try
+            {
+                EmployeeHandler.UpdateEmployee(id, employee);
+                return Ok(employee);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // DELETE api/<EmployeeController>/5
         [HttpDelete("{id}")]
-        public bool Delete(int id)
+        public ActionResult<bool> Delete(string id)
         {
-            return true;
+            bool result = EmployeeHandler.DeleteEmployee(id);
+            return result ? Ok(result) : BadRequest();
         }
     }
 }

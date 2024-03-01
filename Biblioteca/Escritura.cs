@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Biblioteca
 {
-    public class Escritura
+    public static class Escritura
     {
         public static void EscrituraFuncion(string path, string[] datos)
         {

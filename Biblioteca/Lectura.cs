@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Biblioteca
 {
-    public class Lectura
+    public static class Lectura
     {
         public static string[] Lista(string path)
         {

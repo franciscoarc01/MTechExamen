@@ -4,7 +4,7 @@ namespace API_Backend.Models
 {
     public class Employee
     {
-        public int ID { get; set; }
+        public String ID { get; set; }
 
 
 
