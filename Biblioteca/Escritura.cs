@@ -11,12 +11,17 @@ namespace Biblioteca
     {
         public static void EscrituraFuncion(string path, string[] datos)
         {
-            StreamWriter sw = new StreamWriter(path);
-            for (uint datoInd = 0; datoInd < datos.Length; datoInd++)
+            // Create the file, or overwrite if the file exists.
+            using (FileStream fs = File.Create(path))
             {
-                sw.WriteLine(datos[datoInd]);
+                // Add some information to the file.
+                StreamWriter streamFile = new StreamWriter(fs);
+                for (uint datoInd = 0; datoInd < datos.Length; datoInd++)
+                {
+                    streamFile.WriteLine(datos[datoInd]);
+                }
+                streamFile.Close();
             }
-            sw.Close();
         }
     }
 }
