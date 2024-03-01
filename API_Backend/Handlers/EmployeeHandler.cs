@@ -78,12 +78,28 @@ namespace API_Backend.Handlers
             }
         }
 
+        private static bool isRFCExist(Employee employee)
+        {
+            foreach (Employee employeeItem in employees)
+            {
+                if(employeeItem.RFC == employee.RFC && employeeItem.ID != employee.ID)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         public static bool InsertEmployee(Employee employee)
         {
             //if(employee.RFC.Length == )
             if(employees == null)
             {
                 employees = convertData();
+            }
+            if (isRFCExist(employee))
+            {
+                return false;
             }
             employees.Add(employee);
             return insertData(new string [employees.Count]);
@@ -108,9 +124,14 @@ namespace API_Backend.Handlers
         public static void UpdateEmployee(string id, Employee updateEmployee)
         {
             Employee employee = FindEmployee(id);
+            updateEmployee.ID = id;
             if (employee == null)
             {
-                throw new Exception("Error insert/update");
+                throw new Exception("Not found Employee");
+            }
+            if (isRFCExist(updateEmployee))
+            {
+                throw new Exception("Exist these RFC in the storage");
             }
             employee.BornDate = updateEmployee.BornDate;
             employee.RFC = updateEmployee.RFC;

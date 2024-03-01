@@ -20,7 +20,7 @@ namespace API_Backend.Controllers
         // GET <EmployeeController>/Find/5
         [HttpGet("Find/{id}")]
         //[Route("Find")]
-        public ActionResult<Employee> Get(string id)
+        public ActionResult Get(string id)
         {
             Employee employee = EmployeeHandler.FindEmployee(id);
             if(employee == null)
@@ -49,7 +49,7 @@ namespace API_Backend.Controllers
 
         // PUT <EmployeeController>/5
         [HttpPut("{id}")]
-        public ActionResult<Employee> Put(string id, [FromBody] Employee employee)
+        public ActionResult Put(string id, [FromBody] Employee employee)
         {
             try
             {
