@@ -89,7 +89,7 @@ namespace API_Backend.Handlers
             return insertData(new string [employees.Count]);
         }
 
-        public static Employee FindEmployee(string id)
+        public static Employee? FindEmployee(string id)
         {
             if (employees == null)
             {
