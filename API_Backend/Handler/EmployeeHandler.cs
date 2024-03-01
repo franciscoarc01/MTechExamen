@@ -101,6 +101,10 @@ namespace API_Backend.Handler
         public static void UpdateEmployee(string id, Employee updateEmployee)
         {
             Employee employee = FindEmployee(id);
+            if (employee == null)
+            {
+                throw new Exception("Error insert/update");
+            }
             employee.BornDate = updateEmployee.BornDate;
             employee.RFC = updateEmployee.RFC;
             employee.Status = updateEmployee.Status;
