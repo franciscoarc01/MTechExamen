@@ -1,4 +1,4 @@
-﻿using API_Backend.Handler;
+﻿using API_Backend.Handlers;
 using API_Backend.Models;
 using Microsoft.AspNetCore.Mvc;
 

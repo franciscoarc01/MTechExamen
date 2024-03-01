@@ -2,7 +2,7 @@
 using API_Backend.Models;
 using Biblioteca;
 
-namespace API_Backend.Handler
+namespace API_Backend.Handlers
 {
     public static class EmployeeHandler
     {
