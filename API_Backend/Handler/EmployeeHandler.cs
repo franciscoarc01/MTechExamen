@@ -8,26 +8,33 @@ namespace API_Backend.Handler
     {
         private static List<Employee> employees;
         private static List<Employee> sortedEmployes;
-        private static string PATH = "";
+        private static string PATH = "C:\\Users\\franc\\OneDrive\\Documentos\\Visual Studio 2022\\Projects\\MTechExamen\\BD\\Employee.info";
 
         private static List<Employee> convertData()
         {
             List<Employee> employees = new List<Employee>();
-            string[] data = Lectura.Lista(PATH);
-            foreach (string dataElement in data)
+            try
             {
-                string[] properties = dataElement.Split(',');
-                // "ID: {0},Name: {1},LastName: {2},BornDate: {3},RFC: {4},Status: {5}"
-                employees.Add(new Employee
-                    { 
+                string[] data = Lectura.Lista(PATH);
+                foreach (string dataElement in data)
+                {
+                    string[] properties = dataElement.Split(',');
+                    // "ID: {0},Name: {1},LastName: {2},BornDate: {3},RFC: {4},Status: {5}"
+                    employees.Add(new Employee
+                    {
                         ID = properties[0].Split(":")[1].Replace(" ", string.Empty),
-                        Name = properties[1].Split(":")[1].Replace(" ", string.Empty),
-                        LastName = properties[2].Split(":")[1].Replace(" ", string.Empty),
+                        Name = properties[1].Split(":")[1].Substring(1, properties[1].Split(":")[1].Length - 1),
+                        LastName = properties[2].Split(":")[1].Substring(1, properties[2].Split(":")[1].Length - 1),
                         BornDate = DateTime.Parse(properties[3].Split(":")[1].Replace(" ", string.Empty)),
                         RFC = properties[4].Split(":")[1].Replace(" ", string.Empty),
                         Status = Enum.Parse<EnumEmployeeStatus>(properties[5].Split(":")[1].Replace(" ", string.Empty))
                     }
-                );
+                    );
+                }
+            }
+            catch (FileNotFoundException Fex)
+            {
+                Console.WriteLine(Fex.StackTrace);
             }
             return employees;
         }
@@ -57,7 +64,7 @@ namespace API_Backend.Handler
                         employeeAux.ID,
                         employeeAux.Name,
                         employeeAux.LastName,
-                        employeeAux.BornDate.ToString(),
+                        employeeAux.BornDate.ToString().Substring(0, 10),
                         employeeAux.RFC,
                         employeeAux.Status
                     );

@@ -10,15 +10,16 @@ namespace API_Backend.Controllers
     [ApiController]
     public class EmployeeController : ControllerBase
     {
-        // GET: api/<EmployeeController>
+        // GET: <EmployeeController>
         [HttpGet]
         public IEnumerable<Employee> Get()
         {
             return EmployeeHandler.Employees();
         }
 
-        // GET api/<EmployeeController>/5
-        [HttpGet("{id}")]
+        // GET <EmployeeController>/Find/5
+        [HttpGet("Find/{id}")]
+        //[Route("Find")]
         public ActionResult<Employee> Get(string id)
         {
             Employee employee = EmployeeHandler.FindEmployee(id);
@@ -29,14 +30,15 @@ namespace API_Backend.Controllers
             return Ok(employee);
         }
 
-        // GET api/<EmployeeController>/name
-        [HttpGet("{name}")]
+        // GET <EmployeeController>/FindByName/name
+        [HttpGet("FindByName/{name}")]
+        //[Route("FindByName")]
         public IEnumerable<Employee> GetByName(string name)
         {
             return EmployeeHandler.FindEmployeeByNames(name);
         }
 
-        // POST api/<EmployeeController>
+        // POST <EmployeeController>
         [HttpPost]
         public ActionResult<bool> Post([FromBody] Employee employee)
         {
@@ -45,7 +47,7 @@ namespace API_Backend.Controllers
             return result ? Ok(result) : BadRequest(result);
         }
 
-        // PUT api/<EmployeeController>/5
+        // PUT <EmployeeController>/5
         [HttpPut("{id}")]
         public ActionResult<Employee> Put(string id, [FromBody] Employee employee)
         {
@@ -60,7 +62,7 @@ namespace API_Backend.Controllers
             }
         }
 
-        // DELETE api/<EmployeeController>/5
+        // DELETE <EmployeeController>/5
         [HttpDelete("{id}")]
         public ActionResult<bool> Delete(string id)
         {
