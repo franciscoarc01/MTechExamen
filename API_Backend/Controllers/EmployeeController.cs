@@ -40,8 +40,9 @@ namespace API_Backend.Controllers
         [HttpPost]
         public ActionResult<bool> Post([FromBody] Employee employee)
         {
+            employee.ID = Guid.NewGuid().ToString().Substring(24, 12);
             bool result = EmployeeHandler.InsertEmployee(employee);
-            return result ? Ok(result) : BadRequest();
+            return result ? Ok(result) : BadRequest(result);
         }
 
         // PUT api/<EmployeeController>/5
@@ -64,7 +65,7 @@ namespace API_Backend.Controllers
         public ActionResult<bool> Delete(string id)
         {
             bool result = EmployeeHandler.DeleteEmployee(id);
-            return result ? Ok(result) : BadRequest();
+            return result ? Ok(result) : BadRequest(result);
         }
     }
 }
